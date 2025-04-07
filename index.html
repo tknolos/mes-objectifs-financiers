@@ -2,7 +2,6 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mes Objectifs Financiers – Thérèse Tshibola Kapanga</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
@@ -19,11 +18,11 @@
       text-align: center;
       position: relative;
     }
-    header img.logo {
+    header .logo {
       position: absolute;
       top: 20px;
       left: 20px;
-      height: 60px;
+      height: 100px; /* bigger logo */
     }
     .profile {
       display: flex;
@@ -62,6 +61,7 @@
       font-weight: bold;
       text-decoration: none;
     }
+
     main {
       padding: 40px 20px;
       max-width: 960px;
@@ -94,6 +94,7 @@
       border: 1px solid #ccc;
       border-radius: 6px;
     }
+
     /* Checkboxes */
     .checkbox-section {
       display: grid;
@@ -123,6 +124,7 @@
       border-color: #5c2d91;
       background-color: #eae2f8;
     }
+
     /* Budget */
     .budget-section {
       display: grid;
@@ -136,7 +138,7 @@
       border-radius: 8px;
       border: 1px solid #ddd;
     }
-    .budget-group h3 {
+    .budget-group h3, .budget-group h4 {
       margin-top: 0;
       color: #5c2d91;
     }
@@ -161,6 +163,8 @@
     .input-group input {
       width: 80px;
     }
+
+    /* Buttons */
     button {
       margin-top: 30px;
       padding: 14px 28px;
@@ -174,48 +178,78 @@
     button:hover {
       background-color: #4a2180;
     }
+
+    /* Thank You message (hidden by default) */
+    #thankYouMessage {
+      display: none;
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      text-align: center;
+      margin-top: 30px;
+    }
+    #thankYouMessage h2 {
+      color: #1a2a6c;
+      margin-bottom: 10px;
+    }
+    #thankYouMessage p {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+    #thankYouMessage .cta a {
+      background-color: #6ed3cf;
+      color: #1a2a6c;
+      border-radius: 6px;
+      padding: 10px 16px;
+      font-weight: bold;
+      text-decoration: none;
+    }
   </style>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      // Manage card highlight on checkbox
-      document.querySelectorAll('.checkbox-card input[type="checkbox"]').forEach(checkbox => {
-        checkbox.addEventListener('change', () => {
-          checkbox.parentElement.classList.toggle('checked', checkbox.checked);
-        });
-      });
-    });
-  </script>
 </head>
 <body>
   <header>
-    <img src="https://file.garden/Z9xuPmmntibPZzp6/nolos%20logo" alt="Nolos Logo" class="logo" style="height:100px;">
+    <img 
+      src="https://file.garden/Z9xuPmmntibPZzp6/nolos%20logo" 
+      alt="Nolos Logo" 
+      class="logo"
+    >
     <div class="profile">
-      <img src="https://file.garden/Z9xuPmmntibPZzp6/therese%20photo" alt="Thérèse Tshibola Kapanga">
+      <img 
+        src="https://file.garden/Z9xuPmmntibPZzp6/therese%20photo" 
+        alt="Thérèse Tshibola Kapanga"
+      >
       <div class="profile-details">
         <h1>Thérèse Tshibola Kapanga</h1>
         <p><strong>Conseillère en sécurité financière</strong></p>
         <p><strong>Représentante en épargne collective</strong></p>
-        <p>@ : <a href="mailto:theresetshibola.kapanga@nolos.ca" style="color:white; text-decoration:underline;">theresetshibola.kapanga@nolos.ca</a></p>
+        <p>@ : 
+          <a href="mailto:theresetshibola.kapanga@nolos.ca" 
+             style="color:white; text-decoration:underline;">
+            theresetshibola.kapanga@nolos.ca
+          </a>
+        </p>
         <p>T : 1-833-546-6567 poste 214</p>
         <p>M : 438-802-6252</p>
-        <p style="font-size: 0.9em; color: #fff; margin-top: 6px;"></p>
         <div class="cta">
-          <a href="https://calendly.com/theresetshibola-kapanga-nolos" target="_blank">Prendre un rendez-vous</a>
+          <a href="https://calendly.com/theresetshibola-kapanga-nolos" target="_blank">
+            Prendre un rendez-vous
+          </a>
         </div>
       </div>
     </div>
   </header>
+
   <main>
     <h2>Mes objectifs financiers</h2>
-
-    <form id="formulaire" action="https://formsubmit.co/theresetshibola.kapanga@nolos.ca" method="POST">
-
+    <!-- The FORM -->
+    <form id="financialForm" onsubmit="sendForm(event)">
       <!-- Contact Info -->
       <label>Nom complet</label>
       <input type="text" name="Nom complet" required>
 
       <label>Adresse courriel</label>
-      <input type="email" name="Email" required>
+      <input type="email" name="Email" id="userEmail" required>
 
       <label>Numéro de téléphone</label>
       <input type="tel" name="Téléphone">
@@ -223,43 +257,109 @@
       <!-- Retraite -->
       <h3>Retraite</h3>
       <div class="checkbox-section">
-        <label class="checkbox-card"><input type="checkbox" name="Retraite[]" value="Projection revenus retraite"> Je veux faire une projection de mes revenus de retraite</label>
-        <label class="checkbox-card"><input type="checkbox" name="Retraite[]" value="Placements adéquats"> Est-ce que mes placements sont adéquats?</label>
-        <label class="checkbox-card"><input type="checkbox" name="Retraite[]" value="Combien économiser"> Combien d'argent dois-je économiser?</label>
-        <label class="checkbox-card"><input type="checkbox" name="Retraite[]" value="Assurance vie retraite"> Je veux conserver mon assurance vie à la retraite</label>
-        <label class="checkbox-card"><input type="checkbox" name="Retraite[]" value="Protection invalidité"> Avoir une protection invalidité ou maladie</label>
-        <label class="checkbox-card"><input type="checkbox" name="Retraite[]" value="Retrait fiscal avantageux"> Façon la plus fiscalement avantageuse de retirer mes placements</label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Retraite[]" value="Projection revenus retraite">
+          Je veux faire une projection de mes revenus de retraite
+        </label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Retraite[]" value="Placements adéquats">
+          Est-ce que mes placements sont adéquats?
+        </label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Retraite[]" value="Combien économiser">
+          Combien d'argent dois-je économiser?
+        </label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Retraite[]" value="Assurance vie retraite">
+          Je veux conserver mon assurance vie à la retraite
+        </label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Retraite[]" value="Protection invalidité">
+          Avoir une protection invalidité ou maladie
+        </label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Retraite[]" value="Retrait fiscal avantageux">
+          Façon la plus fiscalement avantageuse de retirer mes placements
+        </label>
       </div>
 
       <!-- Événements planifiés -->
       <h3>Événements planifiés</h3>
       <div class="checkbox-section">
-        <label class="checkbox-card"><input type="checkbox" name="Planifiés[]" value="Fonds d'urgence"> Je veux bâtir un fonds d'urgence</label>
-        <label class="checkbox-card"><input type="checkbox" name="Planifiés[]" value="Achat ou vente de propriété"> Achat ou vente d'une propriété</label>
-        <label class="checkbox-card"><input type="checkbox" name="Planifiés[]" value="Produits hypothécaires"> Info sur produits hypothécaires</label>
-        <label class="checkbox-card"><input type="checkbox" name="Planifiés[]" value="Réduire mes impôts"> Je veux diminuer mes impôts</label>
-        <label class="checkbox-card"><input type="checkbox" name="Planifiés[]" value="Rembourser dettes"> Rembourser mes dettes</label>
-        <label class="checkbox-card"><input type="checkbox" name="Planifiés[]" value="Protéger bénéficiaires"> Protéger mes bénéficiaires</label>
-        <label class="checkbox-card"><input type="checkbox" name="Planifiés[]" value="Mandat inaptitude"> Mandat d'inaptitude</label>
-        <label class="checkbox-card"><input type="checkbox" name="Planifiés[]" value="Laisser héritage"> Laisser un héritage</label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Planifiés[]" value="Fonds d'urgence">
+          Je veux bâtir un fonds d'urgence
+        </label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Planifiés[]" value="Achat ou vente de propriété">
+          Achat ou vente d'une propriété
+        </label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Planifiés[]" value="Produits hypothécaires">
+          Info sur produits hypothécaires
+        </label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Planifiés[]" value="Réduire mes impôts">
+          Je veux diminuer mes impôts
+        </label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Planifiés[]" value="Rembourser dettes">
+          Rembourser mes dettes
+        </label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Planifiés[]" value="Protéger bénéficiaires">
+          Protéger mes bénéficiaires
+        </label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Planifiés[]" value="Mandat inaptitude">
+          Mandat d'inaptitude
+        </label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Planifiés[]" value="Laisser héritage">
+          Laisser un héritage
+        </label>
       </div>
 
       <!-- Événements imprévus (Décès, Maladie) -->
       <h3>Événements imprévus</h3>
       <div class="checkbox-section">
-        <label class="checkbox-card"><input type="checkbox" name="Imprévus[]" value="Décès"> À mon décès, prévoir mes protections (assurance vie, testament, etc.)</label>
-        <label class="checkbox-card"><input type="checkbox" name="Imprévus[]" value="Maladie"> En cas de maladie (assurance invalidité, etc.)</label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Imprévus[]" value="Décès">
+          À mon décès, prévoir mes protections (assurance vie, testament, etc.)
+        </label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Imprévus[]" value="Maladie">
+          En cas de maladie (assurance invalidité, etc.)
+        </label>
       </div>
 
-      <!-- Objectifs financiers -->
+      <!-- Autres objectifs financiers -->
       <h3>Autres objectifs financiers</h3>
       <div class="checkbox-section">
-        <label class="checkbox-card"><input type="checkbox" name="Objectifs[]" value="Acheter un véhicule"> Acheter un véhicule</label>
-        <label class="checkbox-card"><input type="checkbox" name="Objectifs[]" value="Changer d'emploi ou entreprendre"> Changer d'emploi ou entreprendre</label>
-        <label class="checkbox-card"><input type="checkbox" name="Objectifs[]" value="Avoir un enfant"> Avoir un enfant</label>
-        <label class="checkbox-card"><input type="checkbox" name="Objectifs[]" value="Contrôler mon budget"> Contrôler mon budget</label>
-        <label class="checkbox-card"><input type="checkbox" name="Objectifs[]" value="Retourner aux études"> Retourner aux études</label>
-        <label class="checkbox-card"><input type="checkbox" name="Objectifs[]" value="Succession ou fiducie"> Succession ou fiducie</label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Objectifs[]" value="Acheter un véhicule">
+          Acheter un véhicule
+        </label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Objectifs[]" value="Changer d'emploi ou entreprendre">
+          Changer d'emploi ou entreprendre
+        </label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Objectifs[]" value="Avoir un enfant">
+          Avoir un enfant
+        </label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Objectifs[]" value="Contrôler mon budget">
+          Contrôler mon budget
+        </label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Objectifs[]" value="Retourner aux études">
+          Retourner aux études
+        </label>
+        <label class="checkbox-card">
+          <input type="checkbox" name="Objectifs[]" value="Succession ou fiducie">
+          Succession ou fiducie
+        </label>
       </div>
 
       <!-- Problème de santé -->
@@ -273,46 +373,76 @@
           <h4>Logement</h4>
           <div class="budget-field">
             <label>Loyer / Hypothèque</label>
-            <div class="input-group"><span>$</span><input type="number" name="Loyer"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Loyer">
+            </div>
           </div>
           <div class="budget-field">
             <label>Taxes</label>
-            <div class="input-group"><span>$</span><input type="number" name="Taxes"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Taxes">
+            </div>
           </div>
           <div class="budget-field">
             <label>Assurances logement</label>
-            <div class="input-group"><span>$</span><input type="number" name="Assurances logement"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Assurances logement">
+            </div>
           </div>
           <div class="budget-field">
             <label>Autres (logement)</label>
-            <div class="input-group"><span>$</span><input type="number" name="Autres logement"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Autres logement">
+            </div>
           </div>
         </div>
         <div class="budget-group">
           <h4>Transport</h4>
           <div class="budget-field">
             <label>Versement voiture</label>
-            <div class="input-group"><span>$</span><input type="number" name="Versement voiture"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Versement voiture">
+            </div>
           </div>
           <div class="budget-field">
             <label>Assurances voiture</label>
-            <div class="input-group"><span>$</span><input type="number" name="Assurances voiture"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Assurances voiture">
+            </div>
           </div>
           <div class="budget-field">
             <label>Permis, immatriculation</label>
-            <div class="input-group"><span>$</span><input type="number" name="Permis"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Permis">
+            </div>
           </div>
           <div class="budget-field">
             <label>Essence</label>
-            <div class="input-group"><span>$</span><input type="number" name="Essence"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Essence">
+            </div>
           </div>
           <div class="budget-field">
             <label>Réparation</label>
-            <div class="input-group"><span>$</span><input type="number" name="Réparation voiture"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Réparation voiture">
+            </div>
           </div>
           <div class="budget-field">
             <label>Stationnement</label>
-            <div class="input-group"><span>$</span><input type="number" name="Stationnement"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Stationnement">
+            </div>
           </div>
         </div>
       </div>
@@ -321,42 +451,69 @@
           <h4>Entretien / Services</h4>
           <div class="budget-field">
             <label>Entretien & Réparations</label>
-            <div class="input-group"><span>$</span><input type="number" name="Entretien logement"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Entretien logement">
+            </div>
           </div>
           <div class="budget-field">
             <label>Électricité</label>
-            <div class="input-group"><span>$</span><input type="number" name="Électricité"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Électricité">
+            </div>
           </div>
           <div class="budget-field">
             <label>Téléphone</label>
-            <div class="input-group"><span>$</span><input type="number" name="Téléphone maison"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Téléphone maison">
+            </div>
           </div>
           <div class="budget-field">
             <label>Internet</label>
-            <div class="input-group"><span>$</span><input type="number" name="Internet"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Internet">
+            </div>
           </div>
         </div>
         <div class="budget-group">
           <h4>Autres dépenses</h4>
           <div class="budget-field">
             <label>Nourriture</label>
-            <div class="input-group"><span>$</span><input type="number" name="Nourriture"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Nourriture">
+            </div>
           </div>
           <div class="budget-field">
             <label>Soins médicaux</label>
-            <div class="input-group"><span>$</span><input type="number" name="Soins médicaux"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Soins médicaux">
+            </div>
           </div>
           <div class="budget-field">
             <label>Soins personnels</label>
-            <div class="input-group"><span>$</span><input type="number" name="Soins personnels"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Soins personnels">
+            </div>
           </div>
           <div class="budget-field">
             <label>Loisirs</label>
-            <div class="input-group"><span>$</span><input type="number" name="Loisirs"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Loisirs">
+            </div>
           </div>
           <div class="budget-field">
             <label>Vacances</label>
-            <div class="input-group"><span>$</span><input type="number" name="Vacances"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Vacances">
+            </div>
           </div>
         </div>
       </div>
@@ -365,46 +522,143 @@
           <h4>Autres engagements</h4>
           <div class="budget-field">
             <label>REER / RAP</label>
-            <div class="input-group"><span>$</span><input type="number" name="REER"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="REER">
+            </div>
           </div>
           <div class="budget-field">
             <label>Assurance vie</label>
-            <div class="input-group"><span>$</span><input type="number" name="Assurance vie"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Assurance vie">
+            </div>
           </div>
           <div class="budget-field">
             <label>Épargne</label>
-            <div class="input-group"><span>$</span><input type="number" name="Épargne"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Épargne">
+            </div>
           </div>
           <div class="budget-field">
             <label>Créances</label>
-            <div class="input-group"><span>$</span><input type="number" name="Créances"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Créances">
+            </div>
           </div>
         </div>
         <div class="budget-group">
           <h4>Résumé</h4>
           <div class="budget-field">
             <label>Revenu familial net</label>
-            <div class="input-group"><span>$</span><input type="number" name="Revenu familial net"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Revenu familial net">
+            </div>
           </div>
           <div class="budget-field">
             <label>Total des dépenses</label>
-            <div class="input-group"><span>$</span><input type="number" name="Total dépenses"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Total dépenses">
+            </div>
           </div>
           <div class="budget-field">
             <label>Surplus ou déficit</label>
-            <div class="input-group"><span>$</span><input type="number" name="Solde budgétaire"></div>
+            <div class="input-group">
+              <span>$</span>
+              <input type="number" name="Solde budgétaire">
+            </div>
           </div>
         </div>
       </div>
 
       <button type="submit">Envoyer</button>
-
-      <!-- Hidden fields for FormSubmit -->
-      <input type="hidden" name="_subject" value="Soumission complète">
-      <input type="hidden" name="_autoresponse" value="Merci pour votre soumission! Nous vous contacterons sous peu.">
-      <input type="hidden" name="_template" value="table">
     </form>
+
+    <!-- The hidden 'Merci' message -->
+    <div id="thankYouMessage">
+      <h2>Merci!</h2>
+      <p>
+        Votre formulaire a été soumis avec succès. <br>
+        Je vous contacterai sous peu.
+      </p>
+      <div class="cta">
+        <a href="https://calendly.com/theresetshibola-kapanga-nolos" target="_blank">
+          Prendre un rendez-vous
+        </a>
+      </div>
+    </div>
   </main>
+
+  <script>
+    // Checkbox highlight
+    document.querySelectorAll('.checkbox-card input[type=\"checkbox\"]').forEach(checkbox => {
+      checkbox.addEventListener('change', () => {
+        checkbox.parentElement.classList.toggle('checked', checkbox.checked);
+      });
+    });
+
+    // This function handles the form submission via fetch
+    async function sendForm(event) {
+      event.preventDefault(); // Stop normal submission/redirect
+
+      const form = event.target;
+      const formData = new FormData(form);
+
+      // 1) Insert your email here
+      const formSubmitURL = 'https://formsubmit.co/theresetshibola.kapanga@nolos.ca';
+
+      // 2) Convert FormData -> object
+      const dataObject = {};
+      formData.forEach((value, key) => {
+        // For multiple checkboxes (like 'Retraite[]'), collect in an array
+        if (key.endsWith('[]')) {
+          const realKey = key.replace('[]', '');
+          if (!dataObject[realKey]) dataObject[realKey] = [];
+          dataObject[realKey].push(value);
+        } else {
+          dataObject[key] = value;
+        }
+      });
+
+      // -- Additional formsubmit config so user gets a copy --
+      // The user’s email is in dataObject['Email'], so:
+      if (dataObject['Email']) {
+        dataObject['_replyto'] = dataObject['Email'];
+      }
+      // The user sees a copy + this message in their email
+      dataObject['_autoresponse'] = 'Merci pour votre soumission! Vous trouverez ci-dessous une copie de vos réponses. Je vous contacterai sous peu.';
+      // Generate a table format
+      dataObject['_template'] = 'table';
+
+      try {
+        const response = await fetch(formSubmitURL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(dataObject)
+        });
+
+        if (response.ok) {
+          // Show "Merci" message
+          form.style.display = 'none';
+          document.getElementById('thankYouMessage').style.display = 'block';
+
+          // Your mom will get a verification email on the very first submission
+          // After that, she'll receive all future submissions
+          // The user also gets a copy since we used _replyto and _autoresponse
+        } else {
+          alert('Une erreur est survenue. Veuillez réessayer.');
+        }
+
+      } catch (err) {
+        alert('Impossible de soumettre le formulaire: ' + err);
+      }
+    }
+  </script>
 </body>
 </html>
-
