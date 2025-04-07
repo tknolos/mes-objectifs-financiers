@@ -22,7 +22,7 @@
       position: absolute;
       top: 20px;
       left: 20px;
-      height: 100px; /* bigger logo */
+      height: 100px;
     }
     .profile {
       display: flex;
@@ -196,14 +196,6 @@
     #thankYouMessage p {
       font-size: 1.1rem;
       margin-bottom: 20px;
-    }
-    #thankYouMessage .cta a {
-      background-color: #6ed3cf;
-      color: #1a2a6c;
-      border-radius: 6px;
-      padding: 10px 16px;
-      font-weight: bold;
-      text-decoration: none;
     }
   </style>
 </head>
@@ -585,11 +577,6 @@
         Votre formulaire a été soumis avec succès. <br>
         Je vous contacterai sous peu.
       </p>
-      <div class="cta">
-        <a href="https://calendly.com/theresetshibola-kapanga-nolos" target="_blank">
-          Prendre un rendez-vous
-        </a>
-      </div>
     </div>
   </main>
 
@@ -608,7 +595,7 @@
       const form = event.target;
       const formData = new FormData(form);
 
-      // 1) Insert your email here
+      // 1) Insert your mom's email here
       const formSubmitURL = 'https://formsubmit.co/theresetshibola.kapanga@nolos.ca';
 
       // 2) Convert FormData -> object
@@ -624,14 +611,11 @@
         }
       });
 
-      // -- Additional formsubmit config so user gets a copy --
-      // The user’s email is in dataObject['Email'], so:
+      // Let user get a copy
       if (dataObject['Email']) {
         dataObject['_replyto'] = dataObject['Email'];
       }
-      // The user sees a copy + this message in their email
       dataObject['_autoresponse'] = 'Merci pour votre soumission! Vous trouverez ci-dessous une copie de vos réponses. Je vous contacterai sous peu.';
-      // Generate a table format
       dataObject['_template'] = 'table';
 
       try {
@@ -647,10 +631,6 @@
           // Show "Merci" message
           form.style.display = 'none';
           document.getElementById('thankYouMessage').style.display = 'block';
-
-          // Your mom will get a verification email on the very first submission
-          // After that, she'll receive all future submissions
-          // The user also gets a copy since we used _replyto and _autoresponse
         } else {
           alert('Une erreur est survenue. Veuillez réessayer.');
         }
